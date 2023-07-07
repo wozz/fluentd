@@ -14,5 +14,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{github.actor}}
+        password: ${{secrets.GITHUB_TOKEN}}
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag wozz/fluentd:v1.16-$(date +%s)
+      run: |
+        docker build . --file Dockerfile --tag ghcr.io/wozz/fluentd:v1.16-${{github.run_id}}
+        docker push ghcr.io/wozz/fluentd:v1.16-${{github.run_id}}
+        
