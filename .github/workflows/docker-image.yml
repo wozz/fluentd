@@ -30,4 +30,4 @@ jobs:
         docker push ghcr.io/wozz/fluentd:v1.16-${{github.run_id}}
     - name: Build Docker Image for arm64
       run: |
-        docker buildx build --platform linux/arm64 --push -t ghcr.io/wozz/fluentd:v1.16-arm64-${{github.run_id}} .
+        docker buildx build --platform linux/arm64 --file Dockerfile.arm64 --push -t ghcr.io/wozz/fluentd:v1.16-arm64-${{github.run_id}} .
