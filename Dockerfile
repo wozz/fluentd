@@ -1,4 +1,4 @@
-FROM fluent/fluentd:v1.16-1
+FROM fluent/fluentd:v1.18
 
 USER root
 
@@ -7,6 +7,7 @@ RUN apk add --no-cache --update --virtual .build-deps \
  && sudo gem install fluent-plugin-prometheus \
  && sudo gem install fluent-plugin-rewrite-tag-filter \
  && sudo gem install fluent-plugin-mongo \
+ && sudo gem install fluent-plugin-gelf \
  && sudo gem sources --clear-all \
  && apk del .build-deps \
  && rm -rf /home/fluent/.gem/ruby/2.5.0/cache/*.gem
